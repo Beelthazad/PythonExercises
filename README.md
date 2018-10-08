@@ -12,4 +12,10 @@ Ejercicios para Fundamentos Programación.
 
 - [Ejercicio 5](ejercicio5.py): Defina funciones que reciban un valor real y dos extremos de un intervalo devuelvan: Valor dentro inter cerrado, valor dentro inter abierto, valor fuera inter cerrado.
 
+- [Ejercicio 6](ejercicio6.py): Función que recibe dos enteros y devuelve el signo de la quiniela.
+
+- [Ejercicio 7](ejercicio7.py): Función que recibe tres valores y devuelve el mínimo de los tres.
+
+- [Ejercicio 8](ejercicio8.py): Función que recibe un entero "n" e imprime los números del 1 a n y del 0 a n-1.
+
 **[]**():
