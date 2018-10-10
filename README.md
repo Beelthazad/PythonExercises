@@ -18,4 +18,17 @@ Ejercicios para Fundamentos Programación.
 
 - [Ejercicio 8](ejercicio8.py): Función que recibe un entero "n" e imprime los números del 1 a n y del 0 a n-1.
 
+
+
+
+
+
+
+
+
+
+
+## Proyectos
+- [Audiencias](audiencias.py): Función que recibe un entero "n" e imprime los números del 1 a n y del 0 a n-1.
+
 **[]**():
