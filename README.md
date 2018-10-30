@@ -57,10 +57,19 @@ Ejercicios para Fundamentos Programación.
 
 - [Ejercicio 23](ejercicio23.py): Implemente una función tal que dada una lista devuelva el menor valor positivo de ella. ¿Qué pasa si todos son negativos? Implemente una función que generalice cualquier mínimo con condición. Esto es, reciba una lista y una condición sobre los elementos de esa lista y devuelva el mínimo de entyre los elementos que cumplen la condición. Invóquela para conseguir el mínimo de los números pares
 
+- [Ejercicio 24](ejercicio24.py): Investigue como convertir una cadena de caracteres en una lista. Usando esa conversión implemente una función que reciba una lista de cadenas de caracteres y devuelva una lista formada por listas de caracteres.
 
+- [Ejercicio 25](ejercicio25.py): ILa operación que convierte una lista de listas en una sola se denomina aplanamiento. Implementela.
 
+## Listas con programación funcional
 
+- [Ejercicio 26](ejercicio26.py): Defina una función que reciba una lista y una función con una condición sobre los elementos de la lista y devuelva el número de elementos de la lista que cumplen con la condición. Investiga las funciones lambda.
 
+- [Ejercicio 27](ejercicio27.py): Defina una función que reciba una lista de cadenas de caracteres y un carácter x y devuelva el número de palabras de la lista que empiezan por x. Haga lo mismo reutilizando la función anterior. ¿Y si quisieramos contar las que terminan en un determinado carácter? ¿O las de longitud mayor que un valor?
+
+## Tuplas
+
+- [Ejercicio 28](ejercicio28.py): Defina una función que dado un número natural n devuelva una lista con las posiciones (i,j) de una matriz cuadrada de orden n empezando por la (0,0). Ídem para los elementos de la diagonal y para la matriz triangular inferior.
 
 
 
