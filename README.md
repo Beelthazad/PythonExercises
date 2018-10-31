@@ -77,6 +77,6 @@ Ejercicios para Fundamentos Programación.
 
 
 ## Proyectos
-- [Audiencias](audiencias.py): Función que recibe un entero "n" e imprime los números del 1 a n y del 0 a n-1.
+- [Audiencias](audiencias.py): 
 
 **[]**():
