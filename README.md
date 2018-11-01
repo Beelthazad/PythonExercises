@@ -71,6 +71,23 @@ Ejercicios para Fundamentos Programación.
 
 - [Ejercicio 28](ejercicio28.py): Defina una función que dado un número natural n devuelva una lista con las posiciones (i,j) de una matriz cuadrada de orden n empezando por la (0,0). Ídem para los elementos de la diagonal y para la matriz triangular inferior.
 
+- [Ejercicio 29](ejercicio29.py): Dada una lista de caracteres construya una lista con todas las tuplas formadas por la longitud y las palabras de la lista. HAga un sort de esa lista. Usando la lista de tuplas anterior construya una función que devuelva las cadenas de mínima y máxima longitud de la lista en una tupla.
+
+## Enumerate
+
+- [Ejercicio 30](ejercicio30.py): Defina una función usando el enumerate de Python tal que dada una lista devuelva el valor mínimo y la posición en la que se encuentra. HAga una segunda versión usando funciones predefinidas de list().
+
+- [Ejercicio 31](ejercicio31.py): Implemente una función tal que dada una lista de cadenas de caracteres yun carácter x devuelva las posiciones que ocupan en la lista las palabras que terminan en x.
+
+## Conjuntos
+
+- [Ejercicio 32](ejercicio32.py): Implemente una función tal que dada una lista de cadenas de caracteres devuelve un conjunto con los caracteres iniciales de las palabras de la lista. Compare las salidas con una lista. 
+
+- [Ejercicio 33](ejercicio33.py): Implemente una función tal que dada una lista de palabras devuelve un conjunto con todos los caracteres de esas palabras. Puede hacer varias versiones, bien mediante un recorrido de las palabras de la lista y dentro recorrer los caracterers de cada palabra con un doble for, bien por comprensión o bien usando la función aplana.
+
+
+
+
 
 
 
