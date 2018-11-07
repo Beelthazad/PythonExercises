@@ -1,21 +1,23 @@
 # Teoría
 
-- [Expresiones y tipos predefinidos](Notebooks_US2018/2.Expresiones y tipos predefinidos/Expresiones y tipos predefinidos.ipynb): ##
+- [Introducción a Python](Notebooks_US2018/Intro_Python)
 
-- [Instrucciones condicionales y bucles](Notebooks_US2018/3. Instrucciones condicionales y bucles/Instrucciones condicionales y bucles.ipynb): ##
+- [Expresiones y Tipos Definidos](Notebooks_US2018/2.Expresiones_Tipos_Definidos)
 
-- [Funciones](Notebooks_US2018/4.Funciones/Funciones.ipynb): ##
+- [Instrucciones, bucles, condicionales](Notebooks_US2018/3.Instrucciones_Bucles_Condicionales)
+
+- [Funciones](Notebooks_US2018/3.Funciones)
 
 # Ejercicios Básicos
 
 
-## Variables y tipos
+### Variables y tipos
 
 - [Ejercicio 1](EjerciciosBasicos/ejercicio1.py): Función que devuelve el resultado de leer enteros, reales, cadenas de caracteres.
 
 - [Ejercicio 2](EjerciciosBasicos/ejercicio2.py): Dos funciones que devuelven suma, producto de dos argumentos leídos desde teclado.
 
-## Operadores
+### Operadores
 
 - [Ejercicio 3](EjerciciosBasicos/ejercicio3.py): Función que calcula el área de un círculo dado su radio. Define función que dado el radio de un círculo devuelve el area y longitud como par de valores.
 
@@ -24,12 +26,12 @@
 - [Ejercicio 5](EjerciciosBasicos/ejercicio5.py): Defina funciones que reciban un valor real y dos extremos de un intervalo devuelvan: Valor dentro inter cerrado, valor dentro inter abierto, valor fuera inter cerrado.
 
 
-## IF
+### IF
 - [Ejercicio 6](EjerciciosBasicos/ejercicio6.py): Función que recibe dos enteros y devuelve el signo de la quiniela.
 
 - [Ejercicio 7](EjerciciosBasicos/ejercicio7.py): Función que recibe tres valores y devuelve el mínimo de los tres.
 
-## WHILE/FOR
+### WHILE/FOR
 
 - [Ejercicio 8](EjerciciosBasicos/ejercicio8.py): Función que recibe un entero "n" e imprime los números del 1 a n y del 0 a n-1.
 
@@ -43,7 +45,7 @@
 
 - [Ejercicio 13](EjerciciosBasicos/ejercicio13.py): Defina una función tal que dado un entero devuelva si es primo.
 
-## Ejercicios de Listas
+### Ejercicios de Listas
 
 - [Ejercicio 14](EjerciciosBasicos/ejercicio14.py): Defina una función tal que dado un entero n devuelva una lista con los números del 1 al n. Hacer lo mismo pero solo con los pares.
 
@@ -69,32 +71,32 @@
 
 - [Ejercicio 25](EjerciciosBasicos/ejercicio25.py): ILa operación que convierte una lista de listas en una sola se denomina aplanamiento. Implementela.
 
-## Listas con programación funcional
+### Listas con programación funcional
 
 - [Ejercicio 26](EjerciciosBasicos/ejercicio26.py): Defina una función que reciba una lista y una función con una condición sobre los elementos de la lista y devuelva el número de elementos de la lista que cumplen con la condición. Investiga las funciones lambda.
 
 - [Ejercicio 27](EjerciciosBasicos/ejercicio27.py): Defina una función que reciba una lista de cadenas de caracteres y un carácter x y devuelva el número de palabras de la lista que empiezan por x. Haga lo mismo reutilizando la función anterior. ¿Y si quisieramos contar las que terminan en un determinado carácter? ¿O las de longitud mayor que un valor?
 
-## Tuplas
+### Tuplas
 
 - [Ejercicio 28](EjerciciosBasicos/ejercicio28.py): Defina una función que dado un número natural n devuelva una lista con las posiciones (i,j) de una matriz cuadrada de orden n empezando por la (0,0). Ídem para los elementos de la diagonal y para la matriz triangular inferior.
 
 - [Ejercicio 29](EjerciciosBasicos/ejercicio29.py): Dada una lista de caracteres construya una lista con todas las tuplas formadas por la longitud y las palabras de la lista. HAga un sort de esa lista. Usando la lista de tuplas anterior construya una función que devuelva las cadenas de mínima y máxima longitud de la lista en una tupla.
 
-## Enumerate
+### Enumerate
 
 - [Ejercicio 30](EjerciciosBasicos/ejercicio30.py): Defina una función usando el enumerate de Python tal que dada una lista devuelva el valor mínimo y la posición en la que se encuentra. HAga una segunda versión usando funciones predefinidas de list().
 
 - [Ejercicio 31](EjerciciosBasicos/ejercicio31.py): Implemente una función tal que dada una lista de cadenas de caracteres yun carácter x devuelva las posiciones que ocupan en la lista las palabras que terminan en x.
 
-## Conjuntos
+### Conjuntos
 
 - [Ejercicio 32](EjerciciosBasicos/ejercicio32.py): Implemente una función tal que dada una lista de cadenas de caracteres devuelve un conjunto con los caracteres iniciales de las palabras de la lista. Compare las salidas con una lista. 
 
 - [Ejercicio 33](EjerciciosBasicos/ejercicio33.py): Implemente una función tal que dada una lista de palabras devuelve un conjunto con todos los caracteres de esas palabras. Puede hacer varias versiones, bien mediante un recorrido de las palabras de la lista y dentro recorrer los caracterers de cada palabra con un doble for, bien por comprensión o bien usando la función aplana.
 
 
-# Proyectos de Laboratorio
+## Proyectos de Laboratorio
 
 - [Cifrado](Proyectos_LAB/Cifrado) 
 
@@ -104,7 +106,7 @@
 
 - [Población](Proyectos_LAB/Poblacion) 
 
-# +Ejercicios de Notebook
+## +Ejercicios de Notebook
 
 - [Audiencias](Notebooks_Ejercicios/Audiencias)
 
