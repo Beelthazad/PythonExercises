@@ -1,5 +1,13 @@
-# Ejercicios Python: F.P 1º
-Ejercicios para Fundamentos Programación.
+# Teoría
+
+- [Expresiones y tipos predefinidos](Notebooks_US2018/2.Expresiones y tipos predefinidos/Expresiones y tipos predefinidos.ipynb): ##
+
+- [Instrucciones condicionales y bucles](Notebooks_US2018/3. Instrucciones condicionales y bucles/Instrucciones condicionales y bucles.ipynb): ##
+
+- [Funciones](Notebooks_US2018/4.Funciones/Funciones.ipynb): ##
+
+# Ejercicios Básicos
+
 
 ## Variables y tipos
 
@@ -86,15 +94,28 @@ Ejercicios para Fundamentos Programación.
 - [Ejercicio 33](EjerciciosBasicos/ejercicio33.py): Implemente una función tal que dada una lista de palabras devuelve un conjunto con todos los caracteres de esas palabras. Puede hacer varias versiones, bien mediante un recorrido de las palabras de la lista y dentro recorrer los caracterers de cada palabra con un doble for, bien por comprensión o bien usando la función aplana.
 
 
+# Proyectos de Laboratorio
+
+- [Cifrado](Proyectos_LAB/Cifrado) 
+
+- [Mínimos Cuadrados](Proyectos_LAB/MinimosCuadrados) 
+
+- [Normalidad](Proyectos_LAB/Normalidad) 
+
+- [Población](Proyectos_LAB/Poblacion) 
+
+# +Ejercicios de Notebook
+
+- [Audiencias](Notebooks_Ejercicios/Audiencias)
+
+- [Bolsa](Notebooks_Ejercicios/Bolsa)
+
+- [GPS](Notebooks_Ejercicios/GPS)
+
+- [Sevici](Notebooks_Ejercicios/Sevici)
 
 
 
+sevBeel X
 
-
-
-
-## Proyectos
-- [Audiencias](audiencias.py): 
-
-**[]**():
 
