@@ -6,7 +6,7 @@
 
 - [Instrucciones, bucles, condicionales](Notebooks_US2018/3.Instrucciones_Bucles_Condicionales)
 
-- [Funciones](Notebooks_US2018/3.Funciones)
+- [Funciones](Notebooks_US2018/4.Funciones/)
 
 # Ejercicios Básicos
 
