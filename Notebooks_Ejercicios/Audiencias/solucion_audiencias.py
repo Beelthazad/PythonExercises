@@ -126,7 +126,8 @@ def medias_por_ediciones(audiencias):
     return medias
 
 medias = medias_por_ediciones(AUDIENCIAS_GH_OPT)
-print("\x1b[6;30;42m" , "Función MEDIAS por ediciones...", "\x1b[0m" , medias, "\n")
+print("\x1b[6;30;42m" , "Función MEDIAS por ediciones...", "\x1b[0m", "\n")
+print(medias)
 
 def muestra_evolucion_audiencias(audiencias):
     ''' Genera una curva con la evolución de las audiencias
@@ -231,6 +232,7 @@ def calcula_estadisticos(audiencias):
     pass
 
 media, mediana, maximo, minimo = calcula_estadisticos(AUDIENCIAS_GH_OPT)
+print("\x1b[6;30;42m" , "Función calcula_estadisticos()...", "\x1b[0m" ,"\n")
 print('Media: ', media)
 print('Mediana:', mediana)
 print('Máximo:', maximo)
@@ -245,15 +247,19 @@ def lista_medias_shares(audiencias):
        - pares (medias de audiencia, edición) ordenados de mayor a menor media -> [(float, int)]
     '''
     medias = medias_por_ediciones(audiencias)
-    shares_eds_i = [(float(v), int(k)) for k,v in enumerate(medias)]
     # Terminar
-
-
-
+    shares_eds_i = list()
+# Creamos una lista tuplas a partir del diccionario que genera la función medias_por_ediciones().
+    for edicion, share_media in medias.items():
+        shares_eds_i.append(tuple([float(share_media),int(edicion)]))
+# Ordenamos la lista por el segundo elemento de la tupla. Podríamos hacerlo un 127% + rápido usando como key del ordenado itemgetter(1).
+    shares_eds_i.sort(key=lambda x:x[1])
+    return shares_eds_i
     pass
 
 
 # Test de la función lista_medias_shares
 shares_eds = lista_medias_shares(AUDIENCIAS_GH)
+print("\x1b[6;30;42m" , "Función lista_medias_share...", "\x1b[0m" ,"\n")
 for s, e in shares_eds:
-    print("{:3d} -> {:6.3f}".format(e, s))
+    print("{:6.3f} -> {:3f}".format(e, s))
