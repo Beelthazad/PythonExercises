@@ -108,7 +108,7 @@
 
 ## +Ejercicios de Notebook
 
-- [Audiencias](Notebooks_Ejercicios/Audiencias)
+- [Audiencias](Notebooks_Ejercicios/Audiencias)  ✓
 
 - [Bolsa](Notebooks_Ejercicios/Bolsa)
 
