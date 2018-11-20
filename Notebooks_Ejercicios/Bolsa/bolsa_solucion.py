@@ -3,10 +3,45 @@
 from math import sqrt
 from matplotlib import pyplot as plt
 import statistics
-import csv
 
 '''
-    FUNCIONES COMPLETADAS: 0/8
+UTILIDADES
+---------------- * Marcadores para subplotting. De interés.
+================    ===============================
+character           description
+================    ===============================
+   -                solid line style
+   --               dashed line style
+   -.               dash-dot line style
+   :                dotted line style
+   .                point marker
+   ,                pixel marker
+   o                circle marker
+   v                triangle_down marker
+   ^                triangle_up marker
+   <                triangle_left marker
+   >                triangle_right marker
+   1                tri_down marker
+   2                tri_up marker
+   3                tri_left marker
+   4                tri_right marker
+   s                square marker
+   p                pentagon marker
+   *                star marker
+   h                hexagon1 marker
+   H                hexagon2 marker
+   +                plus marker
+   x                x marker
+   D                diamond marker
+   d                thin_diamond marker
+   |                vline marker
+   _                hline marker
+================    ===============================
+'''
+
+'''
+    *FUNCIONES COMPLETADAS: 6/8
+    ** ⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜ 60% **
 '''
 
 def lee_precios_empresa(empresa, ruta='./data/', extension='.MC.txt'):
@@ -31,8 +66,9 @@ def lee_precios_empresa(empresa, ruta='./data/', extension='.MC.txt'):
     '''
     lista_precios = list()
     with open(''.join([ruta, empresa, extension]), encoding='utf-8') as f:
-        lector = csv.reader(f) # Así evitamos trabajar de +.
-        lista_precios = [precio for precio in lector] # Esto convierte todos los campos sin '' a tipo float.
+        for linea in f:
+            precio = float(linea)
+            lista_precios.append(precio)
     return lista_precios
     pass
 
@@ -58,6 +94,13 @@ def lee_precios_empresas(empresas, ruta='./data/', extension='.MC.txt'):
     y devuelve como salida un diccionario de series de precios en el que se
     usan como claves los nombres de las empresas
     '''
+    precios = dict()
+    for i in range(len(empresas)):
+        lista_aux = list()
+        lista_aux = lee_precios_empresa(empresas[i])
+        precios[empresas[i]] = lista_aux
+
+    return precios
     pass
 
 # Test de la función lee_precios_empresas
@@ -68,7 +111,7 @@ for e in precios:
     print('{}'.format(e), precios[e][:5])
 
 
-def traza_curva(serie, label='Valor', color='blue'):
+def traza_curva(serie, label='Valor', color='blue', marker='d'):
     ''' Traza una curva a partir de una serie de puntos
 
     ENTRADA:
@@ -94,9 +137,9 @@ def traza_curva(serie, label='Valor', color='blue'):
 bbva_precios = lee_precios_empresa('BBVA')
 
 traza_curva(bbva_precios, label='BBVA')
-traza_curva(bbva_precios, color='black')
+traza_curva(bbva_precios, color='black', label='BBVA')
 
-def traza_curvas(series, colores):
+def traza_curvas(series, colores, titulo=''):
     ''' Traza varias curvas para varias series de puntos
 
     ENTRADA:
@@ -113,15 +156,41 @@ def traza_curvas(series, colores):
       para generar los distintos trazos de la gráfica
 
     NOTA: Puede ser de utilidad la función 'built-in' zip
+    ------------------------------------------------------------------------------------------
+    EXPLICACIÓN: Vamos a hacerlo usando 'subplotting'.
+                    * Inicializamos una figura / fig = plt.figure()
+                    * Añadimos a la figura un subplot / ax = fig.add_subplot(111) # El 111 identifica qué tipo de subplotting queremos.
+                    * Iteramos por nuestro diccionario de series. En Python3 se suele utilizar el método de abajo.
+                    * Nos dice que iteremos sobre ambas listas en paralelo, pero no es necesario. Tenemos el mismo nº de elementos en TODAS
+                      las listas con las que vamos a trabajar. Solo necesitamos un bucle for.
+                    * Dentro del bucle, añadimos una línea por cada iteración con ax.plot(serie, etiqueta, color) accediendo a la posición mediante 'i'.
+                    * Finalizamos añadiendo la leyenda, dibujando y mostrando.
     '''
+    lista_nom = list()
+    lista_series = list()
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+
+    for key, value in series.items():   # Iterando sobre el diccionario.
+        lista_nom.append(key)
+        lista_series.append(value)
+
+    for i in range(len(lista_nom)):
+            ax.plot(lista_series[i], label=lista_nom[i], c=colores[i])
+
+    plt.legend(loc=2)
+    ax.set_title(titulo)
+    plt.draw()
+    plt.show()
     pass
 
 # Test de la función traza_curvas
+marcadores = ['*','p','v','d']
 empresas = ['BBVA', 'SAN', 'ACS', 'GAS']
 precios = lee_precios_empresas(empresas)
 colores = ['blue', 'red', 'orange', 'grey']
 
-traza_curvas(precios, colores)
+traza_curvas(precios, colores, titulo='Curva de precios de empresa')
 
 def calcula_incrementos(serie):
     ''' Calcula incrementos porcentuales (tantos por 1) a partir de una serie
@@ -137,6 +206,14 @@ def calcula_incrementos(serie):
     en cuanto a la magnitud. Por ejemplo un valor de 0.05 implica una subida
     diaria del 5%, y una bajada del 1% se corresponderá con -0.01.
     '''
+    lista_incrementos = list()
+    for i in range(1,len(serie)):
+        incremento = serie[i] - serie[i-1]
+        incremento = float(incremento/serie[i-1])
+        lista_incrementos.append(incremento)
+
+    print("Lista de incrementos creada.")
+    return lista_incrementos
     pass
 
 # Test de la función calcula incrementos
@@ -145,7 +222,8 @@ precios = lee_precios_empresas(empresas)
 colores = ['blue', 'red', 'orange', 'grey']
 
 incrementos = {e: calcula_incrementos(precios[e]) for e in empresas}
-traza_curvas(incrementos, colores)
+traza_curvas(incrementos, colores, titulo='Curva de incrementos')
+print("Se ha imprimido la curva de incrementos.")
 
 def calcula_media_movil(serie, ventana=5):
     ''' Calcula la media móvil de una serie
@@ -164,6 +242,18 @@ def calcula_media_movil(serie, ventana=5):
     será "serie[ventana]". A los puntos anteriores se les asignará como valor
     de media móvil la correspondiente a este primer punto.
     '''
+    lista_media_mov = list()
+    pos = 0
+    suma_aux = 0
+    cont_iter = 1
+    for i in range(len(serie)):
+        suma_aux = float(suma_aux + serie[i])
+        if i == ventana*cont_iter:
+            lista_media_mov.append(float(suma_aux/(ventana*cont_iter)))
+            cont_iter += 1
+            suma_aux = 0
+
+    return lista_media_mov
     pass
 
 
@@ -176,9 +266,9 @@ colores = ['blue', 'red', 'orange', 'grey']
 
 bbva_movil = calcula_media_movil(bbva_precios, ventana=10)
 precios_media = {'Precios': bbva_precios, 'Media': bbva_movil}
-traza_curvas(precios_media, ['blue', 'red'])
+traza_curvas(precios_media, ['blue', 'red'], titulo='BBVA precios con media móvil')
 medias = {e: calcula_media_movil(incrementos[e], ventana=10) for e in empresas}
-traza_curvas(medias, colores)
+traza_curvas(medias, colores, titulo=empresas)
 
 
 def similitud_coseno(serie_a, serie_b):
