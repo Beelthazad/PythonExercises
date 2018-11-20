@@ -3,6 +3,8 @@ import csv
 import statistics
 from matplotlib import pyplot as plt
 
+
+
 '''
 Lee el fichero de entrada y devuelve una lista de audiencias.
 
@@ -11,6 +13,11 @@ se representa con una tupla que tiene ( edición, audiencia )
 
 Hay que transformar la entrada (cadenas de caracteres) en valores
 numéricos para que puedan ser procesados posteriormente.
+
+          FINALIZADO
+**    ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛ 100%    **
+
+
 '''
 
 def lee_audiencias(fichero):

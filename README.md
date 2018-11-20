@@ -8,6 +8,10 @@
 
 - [Funciones](Notebooks_US2018/4.Funciones/)
 
+- [Secuencias, listas y tuplas](Notebooks_US2018/5.Secu_Listas_Tuplas)
+
+- [Diccionarios y conjuntos](Notebooks_US2018/6.Diccionarios_conjuntos)
+
 # Ejercicios Básicos
 
 
@@ -39,7 +43,7 @@
 
 - [Ejercicio 10](EjerciciosBasicos/ejercicio10.py): Defina una función que recibe n y m, enteros y muestre en consola los valores entre n y m-1. Calcule la suma entre n y m-1. Entre n y m, también.
 
-- [Ejercicio 11](EjerciciosBasicos/ejercicio11.py): Defina una función que dado un entero devuelva su factorial. 
+- [Ejercicio 11](EjerciciosBasicos/ejercicio11.py): Defina una función que dado un entero devuelva su factorial.
 
 - [Ejercicio 12](EjerciciosBasicos/ejercicio12.py): Defina una función que dados un número real x y un entero n calcule x elevado a n.
 
@@ -53,7 +57,7 @@
 
 - [Ejercicio 16](EjerciciosBasicos/ejercicio16.py): Defina una función tal que dado un número n devuelva una lista con los cuadrdados de los pares menores de n.
 
-- [Ejercicio 17](EjerciciosBasicos/ejercicio17.py): Defina una función tal que dada una lista de enteros devuelva la suma de los pares. 
+- [Ejercicio 17](EjerciciosBasicos/ejercicio17.py): Defina una función tal que dada una lista de enteros devuelva la suma de los pares.
 
 - [Ejercicio 18](EjerciciosBasicos/ejercicio18.py): Implemente una función tal que dados dos enteros n y m, devuelva una lista de n elementos aleatorios en el intervalo [-m,m].
 
@@ -91,33 +95,34 @@
 
 ### Conjuntos
 
-- [Ejercicio 32](EjerciciosBasicos/ejercicio32.py): Implemente una función tal que dada una lista de cadenas de caracteres devuelve un conjunto con los caracteres iniciales de las palabras de la lista. Compare las salidas con una lista. 
+- [Ejercicio 32](EjerciciosBasicos/ejercicio32.py): Implemente una función tal que dada una lista de cadenas de caracteres devuelve un conjunto con los caracteres iniciales de las palabras de la lista. Compare las salidas con una lista.
 
 - [Ejercicio 33](EjerciciosBasicos/ejercicio33.py): Implemente una función tal que dada una lista de palabras devuelve un conjunto con todos los caracteres de esas palabras. Puede hacer varias versiones, bien mediante un recorrido de las palabras de la lista y dentro recorrer los caracterers de cada palabra con un doble for, bien por comprensión o bien usando la función aplana.
 
 
 ## Proyectos de Laboratorio
 
-- [Cifrado](Proyectos_LAB/Cifrado) 
+- [Cifrado](Proyectos_LAB/Cifrado)
 
-- [Mínimos Cuadrados](Proyectos_LAB/MinimosCuadrados) 
+- [Mínimos Cuadrados](Proyectos_LAB/MinimosCuadrados)
 
-- [Normalidad](Proyectos_LAB/Normalidad) 
+- [Normalidad](Proyectos_LAB/Normalidad)
 
-- [Población](Proyectos_LAB/Poblacion) 
+- [Población](Proyectos_LAB/Poblacion)
+
+- [D'Hont](Proyectos_LAB/DHont)
 
 ## +Ejercicios de Notebook
 
 - [Audiencias](Notebooks_Ejercicios/Audiencias)  ✓
 
-- [Bolsa](Notebooks_Ejercicios/Bolsa)
+- [Bolsa](Notebooks_Ejercicios/Bolsa) ** ⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜ 60% **
 
 - [GPS](Notebooks_Ejercicios/GPS)
 
 - [Sevici](Notebooks_Ejercicios/Sevici)
 
+- [FutElo](Notebooks_Ejercicios/FutElo)
 
 
 sevBeel X
-
-
