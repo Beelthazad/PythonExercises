@@ -1,8 +1,11 @@
 ### TIPS
+
 - Usa el siguiente comando para transformar un .ipynb a un .py formateado.
-'''
+
+```
 ipython nbconvert --to=python 'tunotebook'.ipynb
-'''
+
+```
 * Requiere instalar ipython (pip install ipython) y listo!
 
 # Teoría
