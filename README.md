@@ -114,9 +114,9 @@
 
 ## +Ejercicios de Notebook
 
-- [Audiencias](Notebooks_Ejercicios/Audiencias)  ✓
+- [Audiencias](Notebooks_Ejercicios/Audiencias) ** ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛ 100% ✓
 
-- [Bolsa](Notebooks_Ejercicios/Bolsa) ** ⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜ 60% **
+- [Bolsa](Notebooks_Ejercicios/Bolsa) ** ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛ 100% ✓
 
 - [GPS](Notebooks_Ejercicios/GPS)
 

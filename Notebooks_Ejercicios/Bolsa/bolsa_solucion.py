@@ -40,8 +40,8 @@ character           description
 '''
 
 '''
-    *FUNCIONES COMPLETADAS: 6/8
-    ** ⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜ 60% **
+    *FUNCIONES COMPLETADAS: 8/8
+    ** ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛ 100% **
 '''
 
 def lee_precios_empresa(empresa, ruta='./data/', extension='.MC.txt'):
@@ -73,9 +73,9 @@ def lee_precios_empresa(empresa, ruta='./data/', extension='.MC.txt'):
     pass
 
 # Test de la función lee_precios_empresa
+print("\x1b[6;30;42m", "Test lee_precios_empresa", "\x1b[0m")
 bbva_precios = lee_precios_empresa('BBVA')
 print(bbva_precios[:20])
-print(type(bbva_precios[1]))
 
 def lee_precios_empresas(empresas, ruta='./data/', extension='.MC.txt'):
     ''' Carga los ficheros de precios de varias empresas en un diccionario
@@ -105,10 +105,10 @@ def lee_precios_empresas(empresas, ruta='./data/', extension='.MC.txt'):
 
 # Test de la función lee_precios_empresas
 empresas = ['BBVA', 'SAN', 'ACS', 'GAS']
-
+print("\x1b[6;30;42m", "Test lee_precios_empresas", "\x1b[0m")
 precios = lee_precios_empresas(empresas)
 for e in precios:
-    print('{}'.format(e), precios[e][:5])
+    print("\x1b[6;30;42m",'{}'.format(e),"\x1b[0m", precios[e][:5])
 
 
 def traza_curva(serie, label='Valor', color='blue', marker='d'):
@@ -212,7 +212,6 @@ def calcula_incrementos(serie):
         incremento = float(incremento/serie[i-1])
         lista_incrementos.append(incremento)
 
-    print("Lista de incrementos creada.")
     return lista_incrementos
     pass
 
@@ -223,7 +222,8 @@ colores = ['blue', 'red', 'orange', 'grey']
 
 incrementos = {e: calcula_incrementos(precios[e]) for e in empresas}
 traza_curvas(incrementos, colores, titulo='Curva de incrementos')
-print("Se ha imprimido la curva de incrementos.")
+print('\033[93m', "------------------------------------------------------------", "\x1b[0m")
+print("**Se ha imprimido la curva de incrementos.**\n")
 
 def calcula_media_movil(serie, ventana=5):
     ''' Calcula la media móvil de una serie
@@ -292,9 +292,19 @@ def similitud_coseno(serie_a, serie_b):
     calcula con la siguiente expresión:
         ab / (sqrt(aa) * sqrt(bb))
     '''
+    aa = 0
+    bb = 0
+    ab = 0
+    for i in range(len(serie_a)):
+        aa = aa + (serie_a[i] * serie_a[i])
+        bb = bb + (serie_b[i] * serie_b[i])
+        ab = ab + (serie_a[i] * serie_b[i])
+
+    return (ab/(sqrt(aa) * sqrt(bb)))
     pass
 
 # Test de la función similitud_coseno
+print("\x1b[6;30;42m", "Test similitud_coseno", "\x1b[0m")
 print(similitud_coseno([1, 2, 3], [2, 4, 6]))       # Dos vectores paralelos
 print(similitud_coseno([1, 2, 3], [-2, -4, -6]))    # Dos vectores opuestos
 print(similitud_coseno([1, 0, 1], [0, 1, 0]))       # Dos vectores ortogonales
@@ -328,8 +338,25 @@ def busca_empresa_mas_parecida(empresa, empresas):
 
             mas_parecida = max(similitudes, key=similitudes.get)
     '''
+    aux = 0
+    lista_aux = 0
+    precios_empresa = lee_precios_empresa(empresa)
+    inc_empresa = calcula_incrementos(precios_empresa)
+    precios_empresas = lee_precios_empresas(empresas)
+    inc_empresas = {e: calcula_incrementos(precios_empresas[e]) for e in empresas}
+    similitudes = dict()
+
+    for i in range(len(empresas)):
+        for key, val in inc_empresas.items():
+            if key == empresas[i]:
+                lista_aux = val
+        aux = similitud_coseno(inc_empresa, lista_aux)
+        similitudes[empresas[i]] = aux
+
+    mas_parecida = max(similitudes, key=similitudes.get)
+    return mas_parecida, similitudes
     pass
-'''
+
 # Test de la función empresa_mas_parecida
 bancos_menos_bbva = ['CABK', 'BKT', 'SAB', 'SAN', 'POP']
 constructoras = ['ACS', 'FER', 'FCC']
@@ -337,7 +364,9 @@ energia = ['ELE', 'REE', 'ENG', 'GAS', 'IBE']
 empresas = bancos_menos_bbva + constructoras + energia
 
 (empresa, similitudes) = busca_empresa_mas_parecida('BBVA', empresas)
-print('La empresa más parecida a BBVA es ' + empresa)
+print("\x1b[6;30;42m",'La empresa más parecida a BBVA es:','\x1b[0m')
 for e in similitudes.keys():
-    print("{:5}  {:5.3f}".format(e, similitudes[e])
-'''
+    if e == empresa:
+        print("\x1b[2;37;41m{:5}  {:5.3f}\x1b[0m".format(e, similitudes[e]))
+    else:
+        print("{:5}  {:5.3f}".format(e, similitudes[e]))
