@@ -22,6 +22,10 @@ ipython nbconvert --to=python 'tunotebook'.ipynb
 
 - [Diccionarios y conjuntos](Notebooks_US2018/6.Diccionarios_conjuntos)
 
+- [Entrada y Salida](Notebooks_US2018/7.Entrada_Salida)
+
+- [Expresiones regulares y contenedores](Notebooks_US2018/8.Expresionesregulares_contenedores)
+
 # Ejercicios Básicos
 
 
