@@ -6,7 +6,8 @@ from matplotlib import pyplot as plt
 from matplotlib import image as mpimg
 
 '''
-    ** 0/16 **
+print("\x1b[6;30;42m" ,".", "\x1b[0m" , "\n")
+    ** 10/16 **
 '''
 
 def lee_puntos(fichero):
@@ -29,13 +30,26 @@ def lee_puntos(fichero):
 
         datetime.strptime(tiempo,'%H:%M:%S')
     '''
+    parametros = list()
+    with open(fichero, encoding='utf-8') as f:
+        for linea in f:
+            tiempo, latitud, longitud, altitud = linea.split(',')
+            datetime.strptime(tiempo, '%H:%M:%S')
+            latitud = float(latitud)
+            longitud = float(longitud)
+            altitud = float(altitud)
+            res = tiempo, latitud, longitud, altitud
+            parametros.append(res)
+
+    return parametros
     pass
 
 # Test de la función lee_puntos
 puntos = lee_puntos('./data/ruta.csv')
-print(len(puntos))
-print(puntos[:5])
-
+print('Longitud de la lista puntos[][]: ',len(puntos))
+print("\x1b[6;30;42m" ,"Test función lee_puntos", "\x1b[0m" ,puntos[:5])
+print(puntos[1][1])
+print('Probando el type() del elemento "tiempo": ',type(puntos[1][0]), '\n')
 
 #--------------------------------------------------------------------
 # Funciones de acceso a Puntos
@@ -124,17 +138,30 @@ def filtra_por_tiempo(puntos, inicio, fin):
     Toma como entrada una lista de puntos y dos instantes de tiempo en formato
     'HH:MM:SS'. Produce como salida otra lista de puntos en la que solo se incluyen
     aquellos que se han registrado entre ambos instantes de tiempo.
+    SOL:
+    Vamos a iterar a través de los puntos y comparamos la primera posición de cada
+    elemento en nuestra lista con el intervalo de tiempo inicio/fin
     '''
+    datetime.strptime(inicio, '%H:%M:%S')
+    datetime.strptime(fin, '%H:%M:%S')
+    intervalo = list()
+    for i in range(len(puntos)):
+        if (puntos[i][0] >= inicio) and (puntos[i][0] <= fin):
+            intervalo.append(puntos[i])
+
+    return intervalo
     pass
 
 # Test de la función filtra_por_tiempo
+print("\x1b[6;30;42m" ,"Test función filtra_por_tiempo.", "\x1b[0m")
 primera_parte = filtra_por_tiempo(puntos, '00:00:00', '11:48:00')
 print(len(primera_parte))
-print(primera_parte[:5])
+print(primera_parte[:5], '\n')
 
+print("\x1b[6;30;42m" ,"Test función filtra_por_tiempo, prueba 2.", "\x1b[0m")
 segunda_parte = filtra_por_tiempo(puntos, '11:48:01', '23:36:00')
 print(len(segunda_parte))
-print(segunda_parte[:5])
+print(segunda_parte[:5], '\n')
 
 
 
@@ -162,6 +189,7 @@ def distancia_haversine(coord_a, coord_b):
     return radio_tierra * c
 
 # Test de la función distancia_haversine
+print("\x1b[6;30;42m" ,"Test función haversine: ", "\x1b[0m")
 sevilla = (37.3828300, -5.9731700)
 cadiz = (36.5008762, -6.2684345)
 print(distancia_haversine(sevilla, cadiz))
@@ -183,10 +211,14 @@ def distancia_haversine_3d(coord_a, coord_b):
        - Calcular la distancia_haversine de los dos puntos
        - Usar ambos valores y el teorema de Pitágoras para calcular la distancia haversine_3d
     '''
+    dif_altitud = coord_a[2] - coord_b[2]
+    dist_2d = distancia_haversine(coord_a[:2], coord_b[:2])
+    dist_3d = sqrt(dist_2d**2 + (dif_altitud)**2)
+    return dist_3d
     pass
 
-
-
+# latitud, longitud, altitud
+print("\x1b[6;30;42m" ,"Test función haversine_3d: ", "\x1b[0m")
 # Test de la función distancia_haversine_3d
 coord_1 = (36.74991256557405,-5.147951105609536,712.2000122070312)
 coord_2 = (36.75008556805551,-5.148005923256278,712.7999877929688)
@@ -211,11 +243,25 @@ def distancia_trayecto(puntos):
        - Usar la función distancia_haversine_3d para calcular la distancia total
          del trayecto
     '''
+    coordenadas = list()
+    intervalos = list()
+    for i in range(len(puntos)):
+        coordenadas.append(coordenadas_punto(puntos[i]))
+
+    for z in range(len(coordenadas)):
+        aux = (coordenadas[z][0:], coordenadas[z+1][0:])
+        intervalos.append(aux)
+
+    for _ in range(len(aux)):
+        sum = sum + distancia_haversine_3d(aux[_])
+
+    return sum
     pass
 
 
 
 # Test de la función distancia_trayecto
+print("\x1b[6;30;42m" ,"Test función distancia_trayecto: ", "\x1b[0m")
 print(distancia_trayecto(puntos))
 print(distancia_trayecto(primera_parte))
 print(distancia_trayecto(segunda_parte))
@@ -240,6 +286,7 @@ def velocidad_trayecto(puntos):
     pass
 
 # Test de la función velocidad_trayecto
+print("\x1b[6;30;42m" ,"Test función velocidad_trayecto: ", "\x1b[0m")
 print(velocidad_trayecto(puntos))
 print(velocidad_trayecto(primera_parte))
 print(velocidad_trayecto(segunda_parte))
@@ -265,6 +312,7 @@ def desnivel_acumulado(puntos):
     pass
 
 # Test de la función desnivel_acumulado
+print("\x1b[6;30;42m" ,"Test función desnivel_acumulado: ", "\x1b[0m")
 print(desnivel_acumulado(puntos))
 print(desnivel_acumulado(primera_parte))
 print(desnivel_acumulado(segunda_parte))
@@ -292,6 +340,7 @@ def mostrar_perfil(puntos):
     pass
 
 # Test de la función mostrar_perfil
+print("\x1b[6;30;42m" ,"Test función mostrar_perfil: ", "\x1b[0m")
 mostrar_perfil(puntos)
 
 def mostrar_velocidad_por_intervalo(puntos):
@@ -322,6 +371,7 @@ def mostrar_velocidad_por_intervalo(puntos):
     pass
 
 # Test de la función mostrar_velocidad_por_intervalo
+print("\x1b[6;30;42m" ,"Test función mostrar_velocidad_por_intervalo: ", "\x1b[0m")
 mostrar_velocidad_por_intervalo(puntos)
 
 def mostrar_ruta_en_mapa(puntos, mapa, lado=9, lat_base=-36.665, long_base=5.282, escala=0.23):
@@ -359,4 +409,5 @@ def mostrar_ruta_en_mapa(puntos, mapa, lado=9, lat_base=-36.665, long_base=5.282
     pass
 
 # Test de la función mostrar_ruta_en_mapa
+print("\x1b[6;30;42m" ,"Test función mostrar_ruta_en_mapa: ", "\x1b[0m")
 mostrar_ruta_en_mapa(puntos, './img/mapa_ronda.png')
