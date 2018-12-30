@@ -111,7 +111,9 @@ def tiempo_intervalo(puntos, i):
     SALIDA:
        - tiempo en segundos invertido en el intervalo -> float
     '''
-    return (puntos[i+1][0]-puntos[i][0]).seconds/3600
+    inicio_o = datetime.strptime(puntos[i][0], '%H:%M:%S')
+    fin_o = datetime.strptime(puntos[i+1][0], '%H:%M:%S')
+    return (fin_o - inicio_o).seconds/3600
 
 
 def velocidad_intervalo(puntos, i):
@@ -123,6 +125,7 @@ def velocidad_intervalo(puntos, i):
     SALIDA:
        - velocidad en el intervalo -> float
     '''
+
     return distancia_intervalo(puntos,i)/tiempo_intervalo(puntos,i)
 
 def filtra_por_tiempo(puntos, inicio, fin):
@@ -245,15 +248,20 @@ def distancia_trayecto(puntos):
     '''
     coordenadas = list()
     intervalos = list()
+    aux = list()
     for i in range(len(puntos)):
         coordenadas.append(coordenadas_punto(puntos[i]))
 
-    for z in range(len(coordenadas)):
-        aux = (coordenadas[z][0:], coordenadas[z+1][0:])
+
+    for z in range(0, len(coordenadas)-1):
+        aux = (coordenadas[z], coordenadas[z+1])
         intervalos.append(aux)
 
-    for _ in range(len(aux)):
-        sum = sum + distancia_haversine_3d(aux[_])
+
+    sum = 0
+    for _ in range(len(intervalos)):
+        sum = sum + distancia_haversine_3d(intervalos[_][0], intervalos[_][1])
+
 
     return sum
     pass
@@ -283,6 +291,15 @@ def velocidad_trayecto(puntos):
     siguiente expresión:
           duracion = (fin - inicio).seconds/3600
     '''
+    ## Para convertir un str fecha a una fecha 'de verdad' operable usamos datetime.strptime(str, formato)
+    inicio_o = datetime.strptime(puntos[0][0], '%H:%M:%S')
+    fin_o = datetime.strptime(puntos[-1][0], '%H:%M:%S')
+    duracion = (fin_o - inicio_o).seconds/3600
+    distancia = distancia_trayecto(puntos)
+    if distancia == 0 or duracion == 0:
+        return 0
+
+    return distancia/duracion
     pass
 
 # Test de la función velocidad_trayecto
@@ -309,6 +326,22 @@ def desnivel_acumulado(puntos):
        - Calcular una lista de desniveles de subida a partir de la lista de desniveles
        - Calcular una lista de desniveles de bajada a partir de la lista de desniveles
     '''
+    lista_desniveles = list()
+    lista_sub = list()
+    lista_baj = list()
+    lista_fin = list()
+    for i in range(len(puntos)):
+        lista_desniveles.append(puntos[i][3])
+
+    for _ in range(0, len(lista_desniveles)-1):
+        if lista_desniveles[_] > lista_desniveles[_+1]:
+            lista_baj.append(lista_desniveles[_] - lista_desniveles[_+1])
+        else:
+            lista_sub.append(lista_desniveles[_+1] - lista_desniveles[_])
+
+    print(lista_desniveles[:5])
+    resultado = (sum(lista_sub), sum(lista_baj))
+    return resultado
     pass
 
 # Test de la función desnivel_acumulado
@@ -337,6 +370,14 @@ def mostrar_perfil(puntos):
         - distancia_total: distancia total del trayecto
         - altitudes: lista con las altitudes de cada punto del trayecto
     '''
+    distancia_total = distancia_trayecto(puntos)
+    altitudes = list()
+    for i in range(len(puntos)):
+        altitudes.append(puntos[i][3])
+
+    kilometros = [distancia_total*i/len(altitudes) for i in range(len(altitudes))]
+    plt.plot(kilometros,altitudes)
+    plt.show()
     pass
 
 # Test de la función mostrar_perfil
@@ -368,7 +409,21 @@ def mostrar_velocidad_por_intervalo(puntos):
         - velocidades: lista con las velocidades en cada intervalo del trayecto. No se calcularán
           velocidades para trayectos con tiempo==0 (puede que haya alguno por errores de medida)
     '''
+    distancia_total = distancia_trayecto(puntos)
+    distancias = list()
+    tiempos = list()
+    velocidades = list()
+    for z in range(0, len(puntos)-1):
+        distancias.append(distancia_intervalo(puntos, z))
+        tiempos.append(tiempo_intervalo(puntos,z))
+        velocidades.append(velocidad_trayecto(puntos[z::z+1]))
+
+    kilometros = [distancia_total*i/len(velocidades) for i in range(len(velocidades))]
+    plt.plot(kilometros, velocidades)
+    plt.show()
+
     pass
+
 
 # Test de la función mostrar_velocidad_por_intervalo
 print("\x1b[6;30;42m" ,"Test función mostrar_velocidad_por_intervalo: ", "\x1b[0m")
@@ -406,8 +461,22 @@ def mostrar_ruta_en_mapa(puntos, mapa, lado=9, lat_base=-36.665, long_base=5.282
         - lats_longs: lista de tuplas (latitud, longitud) correspondientes a todos los puntos
           del trayecto.
     '''
+    lats_longs = list()
+    for i in range(0,len(puntos)-1):
+        aux = (puntos[i][1], puntos[i][2])
+        lats_longs.append(aux)
+
+    img = mpimg.imread(mapa)
+    plt.figure(figsize=(lado, lado))
+    plt.imshow(img, zorder=0, extent=[0, lado, 0, lado])
+    xs = [(x + lat_base) * lado  / 0.23 for x, _ in lats_longs]
+    ys = [(y + long_base) * lado / 0.23 for _, y in lats_longs]
+    plt.scatter(ys, xs, zorder=1, s=10, color='blue')
+    plt.axis('off')
+    plt.show()
+
     pass
 
 # Test de la función mostrar_ruta_en_mapa
 print("\x1b[6;30;42m" ,"Test función mostrar_ruta_en_mapa: ", "\x1b[0m")
-mostrar_ruta_en_mapa(puntos, './img/mapa_ronda.png')
+mostrar_ruta_en_mapa(puntos, '/home/sevbeel/Desktop/Informática US/Fundamentos Programación/PythonExercises/Notebooks_Ejercicios/GPS/img/mapa_ronda.PNG')
