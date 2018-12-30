@@ -58,13 +58,25 @@ def lee_estaciones(fichero):
     pasar del formato cadena (que es lo que se interpreta al leer el csv) a un
     valor numérico (para poder aplicar operaciones matemáticas si fuese necesario).
     '''
+    parametros = list()
+    with open(fichero, enconding='utf-8') as f:
+        f.readline() # Leemos la primera línea y así nos la quitamos de en medio.
+        for linea in f:
+            nom_estacion, ntotal_bornetas, nvacias_bornetas, n_bicicletas, latitud, longitud = linea.split(',')
+            ntotal_bornetas = int(ntotal_bornetas)
+            nvacias_bornetas = int(nvacias_bornetas)
+            n_bicicletas = int(n_bicicletas)
+            latitud = float(latitud)
+            longitud = float(longitud)
+            res = nom_estacion, ntotal_bornetas, nvacias_bornetas, n_bicicletas, latitud, longitud
+            parametros.append(res)
+    return parametros
     pass
 
 # Test de la función lee_estaciones
 estaciones_sevici = lee_estaciones('./data/estaciones.csv')
 print(estaciones_sevici[:5])
 
-:
 
 def estaciones_bicis_libres(estaciones, k=5):
     ''' Estaciones que tienen bicicletas libres
@@ -80,6 +92,13 @@ def estaciones_bicis_libres(estaciones, k=5):
     de las estaciones que tienen al menos k bicicletas libres. La lista
     estará ordenada por el número de bicicletas libres.
     '''
+    libres = list()
+    for i in range(0, len(estaciones)-1):
+        if estaciones[i][4] => 5:
+            aux = (estaciones[i][4], estaciones[i][0])
+            libres.append(aux)
+
+    return libres
     pass
 
 # Test de la función estaciones_bicis_libres
@@ -108,6 +127,8 @@ def calcula_distancia(x1, y1, x2, y2, fb):
 
         distancia = sqrt((x2-x1)**2 + (y2-y1)**2) * (1 - fb/100)
     '''
+    distancia = sqrt((x2-x1)**2 + (y2 - y1)**2 * (1 - fb/100))
+    return distancia
     pass
 
 
