@@ -132,11 +132,11 @@ ipython nbconvert --to=python 'tunotebook'.ipynb
 
 - [Bolsa](Notebooks_Ejercicios/Bolsa) ** ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛ 100% ✓
 
-- [GPS](Notebooks_Ejercicios/GPS)
+- [GPS](Notebooks_Ejercicios/GPS)   ** ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛ 100% ✓
 
-- [Sevici](Notebooks_Ejercicios/Sevici)
+- [Sevici](Notebooks_Ejercicios/Sevici) ** ⬛ 10% ✓
 
-- [FutElo](Notebooks_Ejercicios/FutElo)
+- [FutElo](Notebooks_Ejercicios/FutElo) ** 0% **
 
 
 sevBeel X
