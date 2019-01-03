@@ -134,7 +134,7 @@ ipython nbconvert --to=python 'tunotebook'.ipynb
 
 - [GPS](Notebooks_Ejercicios/GPS)   ** ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛ 100% ✓
 
-- [Sevici](Notebooks_Ejercicios/Sevici) ** ⬛ 10% ✓
+- [Sevici](Notebooks_Ejercicios/Sevici) ** ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛ 100% ✓
 
 - [FutElo](Notebooks_Ejercicios/FutElo) ** 0% **
 
