@@ -3,6 +3,7 @@ import csv
 from math import sqrt
 from matplotlib import pyplot as plt
 from matplotlib import image as mpimg
+import time
 '''
 En este ejercicio vamos a trabajar con la red de estaciones del servicio de alquiler de bicicletas de Sevilla, Sevici. Para ello disponemos de los datos de las estaciones, obtenidos de https://citybik.es/.
 
@@ -35,6 +36,26 @@ Longitud -->
     ** 0/6 **
 
 '''
+header = """\
+
+
+  ██████ ▓█████ ██▒   █▓ ██▓ ▄████▄   ██▓
+▒██    ▒ ▓█   ▀▓██░   █▒▓██▒▒██▀ ▀█  ▓██▒
+░ ▓██▄   ▒███   ▓██  █▒░▒██▒▒▓█    ▄ ▒██▒
+  ▒   ██▒▒▓█  ▄  ▒██ █░░░██░▒▓▓▄ ▄██▒░██░
+▒██████▒▒░▒████▒  ▒▀█░  ░██░▒ ▓███▀ ░░██░
+▒ ▒▓▒ ▒ ░░░ ▒░ ░  ░ ▐░  ░▓  ░ ░▒ ▒  ░░▓
+░ ░▒  ░ ░ ░ ░  ░  ░ ░░   ▒ ░  ░  ▒    ▒ ░
+░  ░  ░     ░       ░░   ▒ ░░         ▒ ░
+      ░     ░  ░     ░   ░  ░ ░       ░
+                    ░       ░
+
+   ----- Proyectos FP US 2018 -----
+"""
+
+print(header)
+print('\n')
+
 def lee_estaciones(fichero):
     ''' Lee el fichero de datos y devuelve una lista de estaciones
 
@@ -59,7 +80,7 @@ def lee_estaciones(fichero):
     valor numérico (para poder aplicar operaciones matemáticas si fuese necesario).
     '''
     parametros = list()
-    with open(fichero, enconding='utf-8') as f:
+    with open(fichero, "r") as f:
         f.readline() # Leemos la primera línea y así nos la quitamos de en medio.
         for linea in f:
             nom_estacion, ntotal_bornetas, nvacias_bornetas, n_bicicletas, latitud, longitud = linea.split(',')
@@ -75,8 +96,10 @@ def lee_estaciones(fichero):
 
 # Test de la función lee_estaciones
 estaciones_sevici = lee_estaciones('./data/estaciones.csv')
-print(estaciones_sevici[:5])
-
+print('\x1b[6;30;42m Test función lee_estaciones\x1b[0m')
+print('----'*10, *estaciones_sevici[:5], sep='\n-')
+print('\n')
+time.sleep(2)
 
 def estaciones_bicis_libres(estaciones, k=5):
     ''' Estaciones que tienen bicicletas libres
@@ -91,11 +114,12 @@ def estaciones_bicis_libres(estaciones, k=5):
     Crea una lista formada por tuplas (número de bicicletas libres, nombre)
     de las estaciones que tienen al menos k bicicletas libres. La lista
     estará ordenada por el número de bicicletas libres.
+        name,slots,empty_slots,free_bikes,latitude,longitude
     '''
     libres = list()
     for i in range(0, len(estaciones)-1):
-        if estaciones[i][4] => 5:
-            aux = (estaciones[i][4], estaciones[i][0])
+        if (estaciones[i][3] >= k):
+            aux = (estaciones[i][3], estaciones[i][0])
             libres.append(aux)
 
     return libres
@@ -103,11 +127,19 @@ def estaciones_bicis_libres(estaciones, k=5):
 
 # Test de la función estaciones_bicis_libres
 libres1 = estaciones_bicis_libres(estaciones_sevici)
-print("Hay", len(libres1), "estaciones con 5 o más bicis libres:", libres1[:5])
+print("\x1b[6;30;42mHay" , len(libres1), "estaciones con 5 o más bicis libres:\x1b[0m")
+print('----'*10,*libres1[:5], sep='\n- ')
+print('\n')
+time.sleep(1)
 libres2 = estaciones_bicis_libres(estaciones_sevici, 10)
-print("Hay", len(libres2), "estaciones con 10 o más bicis libres:", libres2[:5])
-libres3 = estaciones_bicis_libres(estaciones_sevici, 1)
-print("Hay", len(libres3), "estaciones con al menos una bici libre:", libres3[:5])
+print("\x1b[6;30;42mHay", len(libres2), "estaciones con 10 o más bicis libres:\x1b[0m")
+print('----'*10,*libres2[:5], sep='\n-')
+print('\n')
+time.sleep(1)
+libres3 = estaciones_bicis_libres(estaciones_sevici, 30)
+print("\x1b[6;30;42mHay", len(libres3), "estaciones con al menos 30 bicis libre:\x1b[0m")
+print('----'*10, *libres2[:5], sep='\n-')
+time.sleep(2)
 
 def calcula_distancia(x1, y1, x2, y2, fb):
     ''' Distancia entre un punto y una estación
@@ -138,6 +170,7 @@ def estaciones_cercanas(estaciones, latitud, longitud, k=5):
 
     ENTRADA:
        - estaciones: lista de estaciones disponibles -> [(str, int, int, int, float, float)]
+                                                name,slots,empty_slots,free_bikes,latitude,longitude
        - latitud: latitud del punto -> float
        - longitud: longitud del punto -> float
        - k: número de estaciones cercanas a calcular -> int
@@ -149,12 +182,26 @@ def estaciones_cercanas(estaciones, latitud, longitud, k=5):
     Crea una lista formada por tuplas (distancia, nombre de estación, bicicletas libres)
     con las k estaciones con bicicletas libres más cercanas al punto dado, ordenada por
     su distancia al punto.
+    Vamos a usar la función calcula_distancia(x1, y1, x2, y2, fb): y luego ordenamos nuestra lista.
     '''
+    lista_estaciones = list()
+    for i in range(0, len(estaciones)-1):
+        distancia = calcula_distancia(estaciones[i][4], latitud, estaciones[i][5], longitud, estaciones[i][3])
+        aux = (distancia, estaciones[i][0], estaciones[i][3])
+        lista_estaciones.append(aux)
+
+    lista_estaciones.sort()
+    return lista_estaciones
     pass
 
 # Test de la función
 cerca_de_mi = estaciones_cercanas(estaciones_sevici, 37.357659, -5.9863)
-print(cerca_de_mi)
+print("\n\x1b[6;30;42m Cerca de mi: \x1b[0m")
+print('----'*10)
+for i in range(0, len(cerca_de_mi[:5])):
+    print('{0}: a {1:.2f} km. se encuentra \x1b[1;31;40m{2}\x1b[0m con {3} bicicletas libres'.format(i, cerca_de_mi[i][0], cerca_de_mi[i][1], cerca_de_mi[i][2]))
+print('\n')
+time.sleep(2)
 
 def dibuja_mapa():
     ancho = 9
@@ -164,12 +211,15 @@ def dibuja_mapa():
     plt.imshow(img, zorder=0, extent=[0, ancho, 0, ancho * aspect_ratio])
     plt.axis('off')
 
+
+
 def dibuja_estaciones(coordenadas, color="red"):
     ancho = 9
     aspect_ratio = 1.09
     xs = [(x - 37.31) * ancho * aspect_ratio / 0.13 for x, _ in coordenadas]
     ys = [(y + 6.04) * ancho / 0.15 for _, y in coordenadas]
     plt.scatter(ys, xs, zorder=1, s=10, color=color)
+
 
 def ubicacion_estaciones(estaciones):
     ''' Coordenadas de todas las estaciones
@@ -182,12 +232,21 @@ def ubicacion_estaciones(estaciones):
     Recibe un lista de estaciones.
     Crea una lista formada por tuplas (latitud, longitud) con todas las estaciones.
     '''
+    coordenadas = list()
+    for i in range(0, len(estaciones)-1):
+        aux = (estaciones[i][4], estaciones[i][5])
+        coordenadas.append(aux)
+
+    return coordenadas
     pass
 
 # Test de la función ubicacion_estaciones
 coordenadas = ubicacion_estaciones(estaciones_sevici)
 dibuja_mapa()
 dibuja_estaciones(coordenadas)
+print("\n\x1b[6;30;42m Mapa de todas las estaciones imprimiendo...\x1b[0m")
+time.sleep(2)
+plt.title('SEVICI (todas las estaciones)')
 plt.show()
 
 def ubicacion_estaciones_libres(estaciones, k=5):
@@ -203,12 +262,24 @@ def ubicacion_estaciones_libres(estaciones, k=5):
     Crea una lista formada por tuplas (latitud, longitud) con todas las estaciones
     que tienen más de k estaciones libres.
     '''
+    libres_coord = list()
+    for i in range(0, len(estaciones)-1):
+        if (estaciones[i][3] >= k):
+            aux = (estaciones[i][4], estaciones[i][5])
+            libres_coord.append(aux)
+
+    return libres_coord
     pass
 
 # Test de la función ubicacion_estaciones_libres
 coordenadas_todas = ubicacion_estaciones(estaciones_sevici)
 coordenadas_libres = ubicacion_estaciones_libres(estaciones_sevici)
+
 dibuja_mapa()
 dibuja_estaciones(coordenadas_todas)
+print("\n\x1b[6;30;42m Mapa estaciones libres imprimiendo\x1b[0m")
+time.sleep(2)
 dibuja_estaciones(coordenadas_libres, color="green")
+plt.title('SEVICI (libres y ocupadas)')
+plt.gca().legend(('coordenadas_todas','coordenadas_libres'))
 plt.show()
