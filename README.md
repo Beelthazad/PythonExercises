@@ -8,6 +8,14 @@ ipython nbconvert --to=python 'tunotebook'.ipynb
 ```
 * Requiere instalar ipython (pip install ipython) y listo!
 
+# IA TI 2019-20
+------------------------------------------
+- [Práctica 1](IATI/practica1.py)
+- [Implementaciones](IATI/Algoritmos/)
+
+
+
+-------------------------------------------
 # Teoría
 
 - [Introducción a Python](Notebooks_US2018/Intro_Python)
