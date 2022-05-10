@@ -147,4 +147,3 @@ ipython nbconvert --to=python 'tunotebook'.ipynb
 - [FutElo](Notebooks_Ejercicios/FutElo) ** 0% **
 
 
-sevBeel X
